@@ -13,6 +13,7 @@ jobs:
       run: |
         pip install nbdev jupyter
         pip install -e .
+        sudo apt install -y pandoc
     - name: Read all notebooks
       run: |
         nbdev_read_nbs
