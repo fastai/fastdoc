@@ -1,0 +1,415 @@
+== Writing the book
+
+[source,python]
+----
+def is_cat(x): return x[0].isupper()
+dls = ImageDataLoaders.from_name_func(
+    path, get_image_files(path), valid_pct=0.2, seed=42,
+    label_func=is_cat, item_tfms=Resize(224))
+----
+
+The third line tells fastai what kind of dataset we have, and how it is
+structured. There are various different classes for different kinds of
+deep learning dataset and problem–here we're using
+`ImageDataLoaders`. The first part of the class name will generally be
+the type of data you have, such as image, or text. The second part will
+generally be the type of problem you are solving, such as
+classification, or regression.
+
+The other important piece of information that we have to tell fastai is
+how to get the labels from the dataset. Computer vision datasets are
+normally structured in such a way that the label for an image is part of
+the file name, or path, most commonly the parent folder name. Fastai
+comes with a number of standardized labelling methods, and ways to write
+your own. Here we define a function `is_cat` which labels cats based on
+a filename rule provided by the dataset creators.
+
+TK Sylvain. Check conversion here, there is a problem with formatting
+
+Finally, we define the `Transform`s that we need. A `Transform` contains
+code that is applied automatically during training; fastai includes many
+pre-defined `Transform`s, and adding new ones is as simple as creating a
+Python function. There are two kinds: `item_tfms` are applied to each
+item (in this case, each item is resized to a 224 pixel square);
+`batch_tfms` are applied to a _batch_ of items at a time using the GPU,
+so they're particularly fast (we'll see many
+examples of these throughout this book).
+
+Why 224 pixels? This is the standard size for historical reasons (old
+pretrained models require this size exactly), but you can pass pretty
+much anything. If you increase the size, you'll often get a
+model with better results (since it will be able to focus on more
+details) but at the price of speed and memory consumption; or visa versa
+if you decrease the size.
+
+....
+This should be fine
+....
+
+In this case, there's an extremely convenient mathematical
+operation that calculates `w*x` for every row of a
+matrix–it's called _matrix multiplication_.
+<<matmul>> show what matrix multiplication looks like (diagram
+from Wikipedia).
+
+This notebook shows all the special syntax to use to write the book.
+
+[source, python]
+----
+for i in range(20):
+    print('0.9953', end=' ')
+----
+
+
+----
+0.9953 0.9953 0.9953 0.9953 0.9953 0.9953 0.9953 0.9953 0.9953 0.9953 0.9953
+ > 0.9953 0.9953 0.9953 0.9953 0.9953 0.9953 0.9953 0.9953 0.9953
+----
+
+[source, python]
+----
+import matplotlib.pyplot as plt
+import numpy as np
+x = np.linspace(0, np.pi*2, 100)
+plt.plot(x, np.sin(x));
+----
+
+
+image::_test_files/output_5_0.png["", 308]
+
+[source, python]
+----
+from fastai.vision.all import *
+x = L(tensor(list(range(i, i+6))) for i in range(10))
+x
+----
+
+
+----
+(#10) [tensor([0, 1, 2, 3, 4, 5]),tensor([1, 2, 3, 4, 5, 6]),tensor([2, 3, 4, 5,
+ > 6, 7]),tensor([3, 4, 5, 6, 7, 8]),tensor([4, 5, 6, 7, 8, 9]),tensor([ 5,  6,
+ > 7,  8,  9, 10]),tensor([ 6,  7,  8,  9, 10, 11]),tensor([ 7,  8,  9, 10, 11,
+ > 12]),tensor([ 8,  9, 10, 11, 12, 13]),tensor([ 9, 10, 11, 12, 13, 14])]
+----
+
+[source, python]
+----
+import graphviz
+def gv(s): return graphviz.Source('digraph G{ rankdir="LR"' + s + '; }')
+----
+
+[source, python]
+----
+gv('''program[shape=box3d width=1 height=0.7]
+inputs->program->results''')
+----
+
+
+image::_test_files/output_8_0.svg["", 228]
+
+== Inputs and outputs
+
+By default inputs and outputs of each code cell are shown (except
+widgets).
+
+[source, python]
+----
+1+1
+----
+
+
+----
+2
+----
+
+You can use the hide input extension to hide an input…
+
+
+++++
+<table border="1" class="dataframe">
+  <tbody>
+    <tr>
+      <td>This</td>
+      <td>is</td>
+    </tr>
+    <tr>
+      <td>an</td>
+      <td>example</td>
+    </tr>
+    <tr>
+      <td>of</td>
+      <td>table</td>
+    </tr>
+  </tbody>
+</table>
+++++
+
+Or you can flag it with `#hide_input`
+
+
+++++
+<table border="1" class="dataframe">
+  <tbody>
+    <tr>
+      <td>This</td>
+      <td>is</td>
+    </tr>
+    <tr>
+      <td>an</td>
+      <td>example</td>
+    </tr>
+    <tr>
+      <td>of</td>
+      <td>table</td>
+    </tr>
+  </tbody>
+</table>
+++++
+
+You can toggle outputs using `o` in edit mode.
+
+[source, python]
+----
+1+1
+----
+
+
+----
+2
+----
+
+Or you can use the `#hide_output` flag (it will be removed from the
+input).
+
+[source, python]
+----
+1+1
+----
+
+To hide cell entirely, use the flag `#hide`.
+
+== Formatting
+
+`backward quotes`, 'single quotes' and "double
+quotes" are all left as is. Note that in asciidoc, text in single
+quotes is emphasized.
+
+This is a bullet list. It absolutely needs a new line before beginning.
+
+* one item
+* two items
+
+This is a numbered list. It also needs a new line.
+
+. first
+. second
+
+This is the syntax for a labeled list (don't forget the new
+line):
+
+Term 1::
+  Definition/description
+Term 2::
+  lila
+
+Alternatively, we can write in asciidoc:
+
+Term 1::
+  Definition/description
+Term 2::
+  lila
+
+
+Block quotes for special interventions:
+
+.Jeremy says
+[TIP]
+====
+Comment from Jeremy
+====
+
+
+.Sylvain says
+[TIP]
+====
+Comment from Sylvain
+====
+
+
+.Alexis says
+[TIP]
+====
+Comment from Alexis
+====
+
+
+Block quotes supported by O'Reilly:
+
+[WARNING]
+====
+This is a warning. Caution gives the same rendering.
+====
+
+
+[NOTE]
+====
+This is a note.
+====
+
+
+[TIP]
+====
+This is a tip. Important gives the same rendering.
+====
+
+
+For a traditional block quote, you still need to put a column for
+correct rendering.
+
+____
+The inside of block quotes is not converted so we need to use asciidoc syntax inside.
+____
+
+
+You can define a sidebar with title like this:
+
+
+.My intervention
+****
+
+This will be changed to a sidebar when converted in Asciidoc.
+
+It can have several lines, contrary to a block quote.
+
+Here as well you need to use asciidoc syntax.
+****
+
+
+Another way to have sidebars is to delimit it between headers cells like
+this (headers need to be in a cell of their own for this to work).
+
+
+.Another intervention
+****
+
+
+All of this will be inside the sidebar. You use normal markdown syntax
+in this block, and can have code cells or images.
+
+
+****
+
+
+To write directly in asciidoc, you can use a raw cell or a triple quote
+enviromnent flagged with `asciidoc`
+
+This is a raw cell. Things inside are not interpreted.
+
+[[table]]
+.An example of table
+[options="header"]
+|======
+| Myth (don't need) | Truth
+| Lots of math | Just high school math is sufficient
+| Lots of data | We've seen record-breaking results with <50 items of data
+| Lots of expensive computers | You can get what you need for state of the art work for free
+|======
+You can use math as usual in notebooks: latexmath:[\(x = \frac{a+b}{2}\)]
+
+Or
+
+[latexmath]
+++++
+\[x = \frac{a+b}{2}\]
+++++
+
+A footnote[this is a footnote]
+
+== Tables and images, caption and references
+
+To add a caption and a reference to an output table, use `#id` and
+`#caption` flags
+
+[source, python]
+----
+learn.fit_one_cycle(4)
+----
+
+
+++++
+<table id="fit" border="1" class="dataframe">
+  <caption>A training loop</caption>
+  <thead>
+    <tr style="text-align: left;">
+      <th>epoch</th>
+      <th>train_loss</th>
+      <th>valid_loss</th>
+      <th>error_rate</th>
+      <th>time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>1.325330</td>
+      <td>0.377157</td>
+      <td>0.108254</td>
+      <td>00:17</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>0.558466</td>
+      <td>0.296632</td>
+      <td>0.085250</td>
+      <td>00:14</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>0.335272</td>
+      <td>0.276012</td>
+      <td>0.081867</td>
+      <td>00:14</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>0.244262</td>
+      <td>0.261981</td>
+      <td>0.076455</td>
+      <td>00:14</td>
+    </tr>
+  </tbody>
+</table>
+++++
+
+For images in markdown, use the HTML syntax. Fields alt, width, caption
+and id are all interpreted properly.
+
+[[puppy]]
+.This is an image
+image::puppy.jpg["Alternative text", 420]
+
+
+Use `<< >>` for references (asciidoc syntax). This is a reference
+to the puppy in <<puppy>> before.
+
+To add a label, caption, alternative text or width to an image output,
+use the following flags
+
+[source, python]
+----
+from fastai.vision.all import *
+path = untar_data(URLs.PETS)
+fnames = get_image_files(path/'images')
+PILImage.create(fnames[0])
+----
+
+
+[[puppy1]]
+.This is an image
+image::_test_files/output_66_0.png["A cute little doggy", 160]
+
+Test an attachment:
+
+
+.This is an image
+image::_test_files/att_00000.png["This is an image"]
