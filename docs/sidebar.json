@@ -1,7 +1,7 @@
 {
   "fastdoc": {
     "Overview": "/",
-    "asciidoc": "asciidoc.html",
-    "clean": "clean.html"
+    "fastdoc.asciidoc": "asciidoc.html",
+    "fastdoc.clean": "clean.html"
   }
 }

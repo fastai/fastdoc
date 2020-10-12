@@ -64,12 +64,9 @@ def clean_nb(fname, dest=None):
 def clean_all(path='book', dest_path=None):
     path = Path(path)
     dest_path = Path('..')/'fastbook' if dest_path is None else Path(dest_path)
-    dest_path1 = Path('..')/'course-v4/nbs'
     nbs = [f for f in path.iterdir() if f.suffix == '.ipynb' and not f.name.startswith('_')]
     for nb in nbs:
         shutil.copy(nb, dest_path/nb.name)
         clean_nb(nb, dest=dest_path/'clean'/nb.name)
-        clean_nb(nb, dest=dest_path1/nb.name)
     shutil.copy(path/'utils.py', dest_path/'utils.py')
-    shutil.copy(path/'utils.py', dest_path1/'utils.py')
     copy_images(path, dest_path)

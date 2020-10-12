@@ -10,10 +10,10 @@ entries:
       title: Overview
       url: /
     - output: web,pdf
-      title: asciidoc
+      title: fastdoc.asciidoc
       url: asciidoc.html
     - output: web,pdf
-      title: clean
+      title: fastdoc.clean
       url: clean.html
     output: web
     title: fastdoc
