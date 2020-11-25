@@ -6,7 +6,13 @@ The output of `fastdoc` is an [asciidoc](https://asciidoc.org/) file for each in
 
 ## Install
 
-`pip install fastdoc` or `conda install fastdoc`
+To install using pip:
+
+`pip install fastdoc` 
+
+To install using Conda:
+
+`conda install -c fastai fastdoc`
 
 ## How to use
 
