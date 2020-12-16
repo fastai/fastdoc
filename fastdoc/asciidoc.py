@@ -13,6 +13,7 @@ __all__ = ['markdown_cell', 'code_cell', 'remove_hidden_cells', 'isolate_adoc_bl
 # Cell
 from .imports import *
 from fastcore.script import *
+from warnings import warn
 
 # Cell
 def markdown_cell(md):
@@ -180,8 +181,7 @@ CODE_MAX_LEN = 80
 def check_code_len(cell):
     lines = cell['source'].split('\n')
     for l in lines:
-        if len(l) > CODE_MAX_LEN:
-            raise Exception(f"Found code too long in a cell:\n{cell['source']}")
+        if len(l) > CODE_MAX_LEN: warn(f"Found code too long in a cell:\n{cell['source']}")
     return cell
 
 # Cell
@@ -236,7 +236,7 @@ def replace_jekylls(cell):
             return f'```asciidoc\n.{title}\n[{surro}]\n====\n{text}\n====\n```\n'
         elif len(name) != 0: return f"```asciidoc\n[{name}]\n====\n{text}\n====\n```\n"
         else:              return f"```asciidoc\n____\n{text}\n____\n```\n"
-    if _re_forgot_column.search(cell["source"]): raise Exception("Found a non-processed block quote, please fix")
+    if _re_forgot_column.search(cell["source"]): warn("Found a non-processed block quote, please fix")
     cell["source"] = _re_block_notes.sub(_rep, cell["source"])
     return cell
 
