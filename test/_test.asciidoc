@@ -263,7 +263,7 @@ This is a tip. Important gives the same rendering.
 ====
 
 
-For a traditional block quote, you still need to put a column for
+For a traditional block quote, you still need to put a colon for
 correct rendering.
 
 ____
