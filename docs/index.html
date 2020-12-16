@@ -44,7 +44,12 @@ nb_path: "index.ipynb"
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><code>pip install fastdoc</code> or <code>conda install fastdoc</code></p>
+<p>To install using pip:</p>
+<div class="highlight"><pre><span></span>pip install fastdoc
+</pre></div>
+<p>To install using Conda:</p>
+<div class="highlight"><pre><span></span>conda install -c fastai fastdoc
+</pre></div>
 
 </div>
 </div>
@@ -57,7 +62,11 @@ nb_path: "index.ipynb"
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Create notebooks in a folder called <code>book</code>. From that folder, run <a href="/fastdoc/asciidoc.html#fastdoc_convert_all"><code>fastdoc_convert_all</code></a> in your terminal. You'll find your exported asciidoc files and all images used in <code>../convert_book</code>. For a single notebook demonstrating all the features of <code>fastdoc</code>, see the <code>test/_test.ipynb</code> notebook. For a complete O'Reilly book written in this way, see <a href="https://github.com/fastai/fastbook/">fastbook</a>.</p>
+<p>Suppose your notebook is in a folder called <code>book</code>. To run fastdoc:</p>
+<p><code>fastdoc_convert_all --path book --dest_path convert_book</code></p>
+<p>You'll find your exported asciidoc files and all images used in <code>convert_book</code>.</p>
+<p>For a single notebook demonstrating all the features of <code>fastdoc</code>, see the <code>test/_test.ipynb</code> notebook.</p>
+<p>For a complete O'Reilly book written in this way, see <a href="https://github.com/fastai/fastbook/">fastbook</a>.</p>
 
 </div>
 </div>
