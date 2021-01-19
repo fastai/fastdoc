@@ -107,7 +107,7 @@ inputs->program->results''')
 
 image::_test_files/output_8_0.svg["", 228]
 
-== Inputs and outputs
+=== Inputs and outputs
 
 By default inputs and outputs of each code cell are shown (except
 widgets).
@@ -188,7 +188,7 @@ input).
 
 To hide cell entirely, use the flag `#hide`.
 
-== Formatting
+=== Formatting
 
 `backward quotes`, 'single quotes' and "double
 quotes" are all left as is. Note that in asciidoc, text in single
@@ -263,8 +263,8 @@ This is a tip. Important gives the same rendering.
 ====
 
 
-For a traditional block quote, you still need to put a colon for
-correct rendering.
+For a traditional block quote, you still need to put a colon for correct
+rendering.
 
 ____
 The inside of block quotes is not converted so we need to use asciidoc syntax inside.
@@ -318,14 +318,18 @@ You can use math as usual in notebooks: latexmath:[\(x = \frac{a+b}{2}\)]
 
 Or
 
+
 [latexmath]
 ++++
-\[x = \frac{a+b}{2}\]
+\begin{equation}
+x = \frac{a+b}{2}
+\end{equation}
 ++++
 
-A footnote[this is a footnote]
 
-== Tables and images, caption and references
+A footnotefootnote:[this is a footnote]
+
+=== Tables and images, caption and references
 
 To add a caption and a reference to an output table, use `#id` and
 `#caption` flags
