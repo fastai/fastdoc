@@ -217,11 +217,15 @@ _re_block_notes = re.compile(r"""
 _re_forgot_column = re.compile("^\s*>[^:]*$", re.MULTILINE)
 
 # Cell
+_re_urls = re.compile("\[(.*?)\]\((.*?)\)")
+
+# Cell
 def replace_jekylls(cell):
     block_names = {'warning':'WARNING', 'note':'NOTE', 'important':'TIP', 'tip': 'TIP', 'stop': 'WARNING',
                    'jargon':'JARGON', 'question':'QUESTION', 'a': 'ALEXIS', 'j': 'JEREMY', 's': 'SYLVAIN'}
     def _rep(m):
         typ,text = m.groups()
+        text = re.sub(_re_urls, r"\2[\1]", text)
         name = block_names.get(typ.lower(), typ.upper())
         if name in ['ALEXIS', 'JEREMY', 'SYLVAIN', 'JARGON', 'QUESTION']:
             title = name[0]+name[1:].lower()
@@ -229,7 +233,7 @@ def replace_jekylls(cell):
             if name=='JARGON':
                 splits = text.split(': ')
                 title = f'{title}: {splits[0]}'
-                text = ': '.join(splits[1:])
+                text = re.sub(_re_urls, r"\2[\1]", ': '.join(splits[1:]))
             if name in ['ALEXIS', 'JEREMY', 'SYLVAIN']:
                 title = f"{title} says"
                 surro = 'TIP'
