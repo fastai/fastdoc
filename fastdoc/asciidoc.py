@@ -501,8 +501,12 @@ def _convert1(fname, dest_path='.'):
 # Cell
 @call_parse
 def fastdoc_convert_all(
-    path:Param("Path to notebooks",str)='book',
-    dest_path:Param("Path to generated asciidoc files",str)='../convert_book'):
+    
+    # Path to notebooks
+    path:str='book',
+    # Path to generated asciidoc files
+    dest_path:str='../convert_book'
+):
     path,dest_path = Path(path),Path(dest_path)
     dest_path.mkdir(parents=True,exist_ok=True)
     (path/'images').mkdir(parents=True,exist_ok=True)
